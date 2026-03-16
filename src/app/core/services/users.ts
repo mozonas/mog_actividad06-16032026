@@ -20,7 +20,8 @@ export class Users {
 
   /** getById lo vamos hacer con promesas y recibirá como parametro id el personaje */
   getById(_id: string): Promise<IUser> {
-    return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${_id}`))
+    const baseurl1 = `${this.baseUrl}/${_id}`;
+    return lastValueFrom(this.httpClient.get<IUser>(baseurl1))
   }
 
   delete(_id: string): Promise<any> {

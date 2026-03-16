@@ -19,9 +19,13 @@
     <!-- Botones de acción -->
     <div class="d-flex justify-content-around mt-3">
 
-      <button class="btn btn-primary btn-sm">
+      <button 
+        class="btn btn-primary btn-sm"
+        [routerLink]="['/user-detail', miUsuario()?._id]"
+        >
         Ver detalle
-      </button>
+        </button>
+
 
       <button class="btn btn-warning btn-sm">
         Actualizar
