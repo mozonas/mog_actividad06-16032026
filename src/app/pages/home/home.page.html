@@ -6,10 +6,25 @@
   <div class="row">
     @for (user of users(); track user._id) {
       <div class="col-md-4 mb-3">
-        <app-user-card [miPersonaje]="user"></app-user-card>
+        <app-user-card [miUsuario]="user"></app-user-card>
       </div>
     }
   </div>
+
+</div>
+
+<div class="d-flex justify-content-center mt-4 gap-2">
+
+  @for (num of pages; track num) {
+    <button 
+      class="btn btn-outline-primary rounded-circle"
+      [class.active]="page() === num"
+      style="width: 45px; height: 45px;"
+      (click)="loadUsers(num)"
+    >
+      {{ num }}
+    </button>
+  }
 
 </div>
 

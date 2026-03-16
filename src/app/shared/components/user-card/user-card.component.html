@@ -3,9 +3,9 @@
 
   <!-- Imagen del usuario -->
   <img 
-    [src]="miPersonaje()?.image" 
+    [src]="miUsuario()?.image" 
     class="card-img-top rounded-circle mx-auto mt-3" 
-    alt="Foto de {{ miPersonaje()?.first_name }}" 
+    alt="Foto de {{ miUsuario()?.first_name }}" 
     style="width: 120px; height: 120px; object-fit: cover;"
   />
 
@@ -13,7 +13,7 @@
 
     <!-- Nombre completo -->
     <h5 class="card-title">
-      {{ miPersonaje()?.first_name }} {{ miPersonaje()?.last_name }}
+      {{ miUsuario()?.first_name }} {{ miUsuario()?.last_name }}
     </h5>
 
     <!-- Botones de acción -->

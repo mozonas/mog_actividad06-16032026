@@ -14,7 +14,6 @@ export class Users {
   getAll(url: string): Promise<IUsersResponse> {
     //lastValueFrom convierte el observa en promesa, firstValueFrom
     const miUrl = (url === "") ? this.baseUrl : this.baseUrl+url
-    debugger
     return lastValueFrom(this.httpClient.get<IUsersResponse>(miUrl))
   }
 

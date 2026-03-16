@@ -9,5 +9,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './user-card.component.css',
 })
 export class UserCardComponent {
-   miPersonaje = input<IUser>()
+   miUsuario = input<IUser>()
 }
