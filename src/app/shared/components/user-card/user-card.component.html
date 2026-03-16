@@ -1,1 +1,37 @@
 <p>user-card works!</p>
+<div class="card text-center shadow-sm">
+
+  <!-- Imagen del usuario -->
+  <img 
+    [src]="miPersonaje()?.image" 
+    class="card-img-top rounded-circle mx-auto mt-3" 
+    alt="Foto de {{ miPersonaje()?.first_name }}" 
+    style="width: 120px; height: 120px; object-fit: cover;"
+  />
+
+  <div class="card-body">
+
+    <!-- Nombre completo -->
+    <h5 class="card-title">
+      {{ miPersonaje()?.first_name }} {{ miPersonaje()?.last_name }}
+    </h5>
+
+    <!-- Botones de acción -->
+    <div class="d-flex justify-content-around mt-3">
+
+      <button class="btn btn-primary btn-sm">
+        Ver detalle
+      </button>
+
+      <button class="btn btn-warning btn-sm">
+        Actualizar
+      </button>
+
+      <button class="btn btn-danger btn-sm">
+        Borrar
+      </button>
+
+    </div>
+  </div>
+</div>
+
