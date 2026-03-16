@@ -5,14 +5,14 @@
 
   <div class="row">
     @for (user of users(); track user._id) {
-      <div class="col-md-4 mb-3">
+      <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
         <app-user-card [miUsuario]="user"></app-user-card>
       </div>
     }
   </div>
 
 </div>
-
+<!--d-flex flex-wrap gap-2 mt-3-->
 <div class="d-flex justify-content-center mt-4 gap-2">
 
   @for (num of pages; track num) {
