@@ -1,1 +1,58 @@
-<p>user-form works!</p>
+<div class="container mt-4">
+
+  <h2 class="mb-4">Nuevo Usuario</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <!-- NOMBRE -->
+    <div class="mb-3">
+      <label class="form-label">Nombre Usuario</label>
+      <input type="text" class="form-control"
+             formControlName="name"
+             placeholder="Introduzca nombre de usuario">
+
+      <div class="text-danger" *ngIf="form.controls.name.touched && form.controls.name.invalid">
+        El nombre es obligatorio
+      </div>
+    </div>
+
+    <!-- APELLIDO -->
+    <div class="mb-3">
+      <label class="form-label">Apellido Usuario</label>
+      <input type="text" class="form-control"
+             formControlName="surname"
+             placeholder="Introduzca apellido de usuario">
+
+      <div class="text-danger" *ngIf="form.controls.surname.touched && form.controls.surname.invalid">
+        El apellido es obligatorio
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="mb-3">
+      <label class="form-label">Email Usuario</label>
+      <input type="email" class="form-control"
+             formControlName="email"
+             placeholder="Introduzca email de usuario">
+
+      <div class="text-danger" *ngIf="form.controls.email.touched && form.controls.email.invalid">
+        Introduzca un email válido
+      </div>
+    </div>
+
+    <!-- IMAGEN -->
+    <div class="mb-3">
+      <label class="form-label">Imagen Usuario</label>
+      <input type="text" class="form-control"
+             formControlName="image"
+             placeholder="Introduzca url de foto usuario">
+    </div>
+
+    <!-- BOTÓN -->
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+      Guardar
+    </button>
+
+  </form>
+
+</div>
