@@ -5,8 +5,8 @@ import { UserFormPage } from './pages/user-form/user-form.page';
 
 export const routes: Routes = [
 { path: 'home', component: HomePage },
-{ path: 'user/:id', component: UserDetailPage },
+{ path: 'user-detail/:_id', component: UserDetailPage },
 { path: 'newuser', component: UserFormPage },
-{ path: 'updateuser/:id', component: UserFormPage },
+{ path: 'updateuser/:_id', component: UserFormPage },
 { path: '**', redirectTo: 'home' }
 ];
