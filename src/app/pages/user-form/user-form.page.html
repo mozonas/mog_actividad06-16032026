@@ -10,10 +10,12 @@
       <input type="text" class="form-control"
              formControlName="name"
              placeholder="Introduzca nombre de usuario">
-
-      <div class="text-danger" *ngIf="form.controls.name.touched && form.controls.name.invalid">
-        El nombre es obligatorio
-      </div>
+      @if(checkControl('name', 'required' )){
+      <p class="error">Campo requerido</p>
+      }
+      @if(checkControl('name', 'minlength' )){
+      <p class="error">Campo con longitud minima de 3 caracteres</p>
+      }
     </div>
 
     <!-- APELLIDO -->
@@ -23,9 +25,12 @@
              formControlName="surname"
              placeholder="Introduzca apellido de usuario">
 
-      <div class="text-danger" *ngIf="form.controls.surname.touched && form.controls.surname.invalid">
-        El apellido es obligatorio
-      </div>
+      @if(checkControl('surname', 'required' )){
+      <p class="error">Campo requerido</p>
+      }
+      @if(checkControl('surname', 'minlength' )){
+      <p class="error">Campo con longitud minima de 3 caracteres</p>
+      }
     </div>
 
     <!-- EMAIL -->
@@ -34,10 +39,12 @@
       <input type="email" class="form-control"
              formControlName="email"
              placeholder="Introduzca email de usuario">
-
-      <div class="text-danger" *ngIf="form.controls.email.touched && form.controls.email.invalid">
-        Introduzca un email válido
-      </div>
+      @if(checkControl('email', 'required' )){
+      <p class="error">Campo requerido</p>
+      }
+      @if(checkControl('email', 'pattern' )){
+      <p class="error">Campo con formato de email inválido</p>
+      }
     </div>
 
     <!-- IMAGEN -->
@@ -46,6 +53,13 @@
       <input type="text" class="form-control"
              formControlName="image"
              placeholder="Introduzca url de foto usuario">
+
+      @if(checkControl('image', 'required' )){
+      <p class="error">Campo requerido</p>
+      }
+      @if(checkControl('image', 'pattern' )){
+      <p class="error">Campo con formato de imagen inválido</p>
+      }
     </div>
 
     <!-- BOTÓN -->

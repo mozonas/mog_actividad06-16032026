@@ -17,12 +17,23 @@ export class UserFormPage {
   private router = inject(Router);
   private userService = inject(Users);
 
-  form = this.fb.nonNullable.group({
-    name: ['', Validators.required],
-    surname: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    image: ['']
-  });
+form = this.fb.nonNullable.group({
+  name: ['', [Validators.required, Validators.minLength(3)]],
+  surname: ['', [Validators.required, Validators.minLength(3)]],
+  email: ['', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
+  ]],
+  image: ['', [
+    Validators.required,
+    Validators.pattern('https?://.*\\.(jpg|jpeg|png|gif|webp)$')
+  ]],
+});
+
+checkControl(control: string, error: string) {
+  const c = this.form.get(control);
+  return c?.hasError(error) && (c.touched || c.dirty);
+}
 
   async submit() {
     if (this.form.invalid) {
@@ -37,3 +48,5 @@ export class UserFormPage {
     this.router.navigate(['/home']);
   }
 }
+
+
