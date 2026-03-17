@@ -1,1 +1,20 @@
-<p>confirm-dialog works!</p>
+<div class="overlay">
+  <div class="dialog">
+
+    <h2 class="{{ type }}">{{ title }}</h2>
+    <p>{{ message }}</p>
+
+    <div class="buttons">
+      <button class="accept" (click)="onAccept()">
+        {{ acceptText }}
+      </button>
+
+      @if (showCancel) {
+        <button class="cancel" (click)="onCancel()">
+          {{ cancelText }}
+        </button>
+      }
+    </div>
+
+  </div>
+</div>
