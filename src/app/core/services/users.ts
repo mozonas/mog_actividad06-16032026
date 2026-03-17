@@ -33,6 +33,7 @@ export class Users {
   }
 
   create(data: Partial<IUser>): Promise<IUser> {
+    let response: Observable<IUser> = this.httpClient.post<IUser>(this.baseUrl, data);
     return lastValueFrom(this.httpClient.post<IUser>(this.baseUrl, data));
   }
 }
