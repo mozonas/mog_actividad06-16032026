@@ -2,6 +2,7 @@ import { Component, inject, input, signal } from '@angular/core';
 import { Users } from '../../core/services/users';
 import { IUser } from '../../core/models/user.interface';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-detail',
@@ -16,14 +17,20 @@ export class UserDetailPage {
   personaje = signal<IPersonaje | null>(null)
   */
   private route= inject(ActivatedRoute);
+  private router = inject(Router);
+
   _id= input<string>()
   userService = inject(Users)
   user = signal<IUser | null>(null)
 
-  async ngOnInit() {
-    const id: string = this._id() ?? '';
-    //hacemos una petecion al servicio
-    this.user.set(await this.userService.getById(id))
-    console.log(this.user());
+async ngOnInit() {
+    try {
+      const id = this.route.snapshot.params['id'];
+      const user = await this.userService.getById(id);
+      this.user.set(user);
+    } catch (err) {
+      // Si el ID no existe o es inválido → redirigimos
+      this.router.navigate(['/error404']);
+    }
   }
 }

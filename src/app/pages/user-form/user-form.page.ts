@@ -34,7 +34,11 @@ export class UserFormPage {
   mode = computed(() => this.userId() ? 'edit' : 'create');
 
   // estado de diálogos (crear, actualizar, éxito, error)
-  dialogState = signal<'none' | 'confirm' | 'confirm-update' | 'success' | 'error'>('none');
+
+  //dialogState = signal<'none' | 'confirm' | 'confirm-update' | 'success' | 'error'>('none');
+  errorMessage = signal<string>('');
+  dialogState = signal<'none' | 'confirm' | 'confirm-update' | 'success-create' | 'success-update' | 'error'>('none');
+
 
   createdUser: IUser | null = null;
 
@@ -61,21 +65,22 @@ export class UserFormPage {
 
   // Cargar datos del usuario para EDITAR
   async loadUser(id: string) {
-  try {
-    const user = await this.userService.getById(id);
+    try {
+      const user = await this.userService.getById(id);
 
-    this.form.patchValue({
-      name: user.first_name,
-      surname: user.last_name,
-      email: user.email,
-      image: user.image
-    });
+      this.form.patchValue({
+        name: user.first_name,
+        surname: user.last_name,
+        email: user.email,
+        image: user.image
+      });
 
-  } catch (err) {
-    console.error('Error cargando usuario', err);
-    this.dialogState.set('error');
+    } catch (err) {
+      console.error('Error cargando usuario', err);
+      this.errorMessage.set(this.userService.extractError(err));
+      this.dialogState.set('error');
+    }
   }
-}
 
 
   // Validación visual
@@ -97,6 +102,7 @@ export class UserFormPage {
       return true;
     } catch (error) {
       console.error('ERROR EN CREATE', error);
+      this.errorMessage.set(this.userService.extractError(error));
       this.dialogState.set('error');
       return false;
     }
@@ -116,6 +122,7 @@ export class UserFormPage {
       return true;
     } catch (err) {
       console.error('ERROR EN UPDATE', err);
+      this.errorMessage.set(this.userService.extractError(err));
       this.dialogState.set('error');
       return false;
     }
@@ -137,27 +144,29 @@ export class UserFormPage {
 
   // Confirmación final para CREAR
   async confirmCreate() {
-    const ok = await this.submit();
-    this.dialogState.set('none');
+  const ok = await this.submit();
+  this.dialogState.set('none');
 
-    if (ok) {
-      queueMicrotask(() => {
-        this.dialogState.set('success');
-      });
-    }
+  if (ok) {
+    queueMicrotask(() => {
+      this.dialogState.set('success-create');
+    });
   }
+}
+
 
   // Confirmación final para EDITAR
   async confirmUpdate() {
-    const ok = await this.submitUpdate();
-    this.dialogState.set('none');
+  const ok = await this.submitUpdate();
+  this.dialogState.set('none');
 
-    if (ok) {
-      queueMicrotask(() => {
-        this.dialogState.set('success');
-      });
-    }
+  if (ok) {
+    queueMicrotask(() => {
+      this.dialogState.set('success-update');
+    });
   }
+}
+
 
   // Volver a Home tras éxito
   goHome() {

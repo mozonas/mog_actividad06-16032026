@@ -5,7 +5,10 @@
   <div class="row">
     @for (user of users(); track user._id) {
       <div class="col-12 col-md-6 col-xl-4 col-xxl-3">
-        <app-user-card [miUsuario]="user"></app-user-card>
+        <app-user-card 
+        [miUsuario]="user"
+        (delete)="openDeleteDialog($event)">
+      </app-user-card>
       </div>
     }
   </div>
@@ -24,6 +27,43 @@
       {{ num }}
     </button>
   }
+
+</div>
+
+<div>
+  @if (dialogState() === 'confirm-delete') {
+  <app-confirm-dialog
+    title="Confirmar eliminación"
+    message="¿Deseas eliminar este usuario?"
+    type="confirm"
+    acceptText="Eliminar"
+    cancelText="Cancelar"
+    (accept)="confirmDelete()"
+    (cancel)="closeDialog()"
+  />
+}
+
+@if (dialogState() === 'success') {
+  <app-confirm-dialog
+    title="Usuario eliminado"
+    message="El usuario ha sido eliminado correctamente."
+    type="success"
+    acceptText="Aceptar"
+    [showCancel]="false"
+    (accept)="closeDialog()"
+  />
+}
+
+@if (dialogState() === 'error') {
+  <app-confirm-dialog
+    title="Error"
+    [message]="errorMessage()"
+    type="error"
+    acceptText="Aceptar"
+    [showCancel]="false"
+    (accept)="dialogState.set('none')"
+  />
+}
 
 </div>
 
