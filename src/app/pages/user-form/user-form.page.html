@@ -1,6 +1,8 @@
 <div class="container mt-4">
 
-  <h2 class="mb-4">Nuevo Usuario</h2>
+  <h2>
+    {{ mode() === 'create' ? 'Nuevo Usuario' : 'Editar Usuario' }}
+  </h2>
 
   <form [formGroup]="form">
 
@@ -63,8 +65,12 @@
     </div>
 
     <!-- BOTÓN -->
-   <button type="button" class="btn btn-primary" (click)="openDialog()" [disabled]="form.invalid">
-    Guardar
+   <button
+    type="button"
+    class="btn btn-primary"
+    (click)="mode() === 'create' ? openDialog() : openUpdateDialog()"
+    [disabled]="form.invalid">
+    {{ mode() === 'create' ? 'Guardar' : 'Actualizar' }}
   </button>
 
 
@@ -96,6 +102,28 @@
       (accept)="goHome()"
     />
   }
+@if (dialogState() === 'confirm-update') {
+  <app-confirm-dialog
+    title="Confirmar actualización"
+    message="¿Deseas actualizar este usuario?"
+    type="confirm"
+    acceptText="Actualizar"
+    cancelText="Cancelar"
+    (accept)="confirmUpdate()"
+    (cancel)="closeDialog()"
+  />
+}
+
+@if (dialogState() === 'success' && mode() === 'edit') {
+  <app-confirm-dialog
+    title="Usuario actualizado"
+    [message]="'El usuario ' + createdUser?.email + ' ha sido actualizado correctamente.'"
+    type="success"
+    acceptText="Aceptar"
+    [showCancel]="false"
+    (accept)="goHome()"
+  />
+}
 
 </div>
 
