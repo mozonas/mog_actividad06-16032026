@@ -1,5 +1,4 @@
-<p>user-card works!</p>
-<div class="card text-center shadow-sm">
+<div class="card text-center shadow-sm mt-4">
 
   <!-- Imagen del usuario -->
   <img 
@@ -26,8 +25,10 @@
         </button>
 
 
-      <button class="btn btn-warning btn-sm">
-        Actualizar
+      <button class="btn btn-warning btn-sm"
+      [routerLink]="['/updateuser', miUsuario()?._id]"
+      >
+      Editar
       </button>
 
       <button class="btn btn-danger btn-sm">
