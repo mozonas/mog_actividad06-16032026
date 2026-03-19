@@ -36,4 +36,11 @@ export class Users {
     let response: Observable<IUser> = this.httpClient.post<IUser>(this.baseUrl, data);
     return lastValueFrom(this.httpClient.post<IUser>(this.baseUrl, data));
   }
+
+  extractError(err: any): string {
+    return err?.error?.message 
+        || err?.message 
+        || 'Ha ocurrido un error inesperado.';
+  }
+
 }

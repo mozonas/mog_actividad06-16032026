@@ -1,4 +1,4 @@
-import { Component,input } from '@angular/core';
+import { Component,input,Output,EventEmitter } from '@angular/core';
 import { IUser } from '../../../core/models/user.interface';
 import { RouterLink } from '@angular/router';
 
@@ -9,5 +9,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './user-card.component.css',
 })
 export class UserCardComponent {
-   miUsuario = input<IUser>()
+   miUsuario = input<IUser>();
+   @Output() delete = new EventEmitter<string>();
+
+  onDelete() {
+    this.delete.emit(this.miUsuario()?._id!);
+  }
 }

@@ -92,7 +92,7 @@
   />
 }
 
-  @if (dialogState() === 'success') {
+  @if (dialogState() === 'success-create') {
     <app-confirm-dialog
       title="Usuario creado"
       [message]="'El usuario ' + createdUser?.email + ' ha sido creado correctamente.'"
@@ -102,6 +102,7 @@
       (accept)="goHome()"
     />
   }
+
 @if (dialogState() === 'confirm-update') {
   <app-confirm-dialog
     title="Confirmar actualización"
@@ -114,7 +115,7 @@
   />
 }
 
-@if (dialogState() === 'success' && mode() === 'edit') {
+@if (dialogState() === 'success-update') {
   <app-confirm-dialog
     title="Usuario actualizado"
     [message]="'El usuario ' + createdUser?.email + ' ha sido actualizado correctamente.'"
