@@ -9,7 +9,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './user-card.component.css',
 })
 export class UserCardComponent {
-   miUsuario = input<IUser>();
+   miUsuario = input.required<IUser>();
+
    @Output() delete = new EventEmitter<string>();
 
   onDelete() {
